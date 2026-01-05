@@ -60,14 +60,20 @@ The analysis followed a rigorous statistical framework (detailed in Section 3 of
 ## 📂 Repository Structure
 
 ```text
-├── data/
-│   ├── us_unemployment_combine.csv  # US Unemployment & Policy Data
-│   ├── us_hpi_combine.csv           # US Housing Price Index Data
-│   └── china_unemployment.csv       # China Regional Data
-├── code/
-│   ├── 01_us_unemployment_model.R   # Regression, VIF, & Interaction plots (Appendix A)
-│   ├── 02_china_unemployment_model.R# Comparative analysis code
-│   └── 03_us_hpi_spatial_analysis.R # Spatial weights & Moran's I test (Appendix B)
-├── visuals/                         # Figures export (Scatter plots, Maps)
-├── Xiaohui Ma - Final Written Capstone.pdf  # Full Report
-└── README.md
+├── Data Analysis(code)/           # R Markdown scripts for statistical modeling & regression
+│   ├── China unemployment analysis.Rmd  # Regression analysis of policy impacts on China's economy
+│   └── US unemployment analysis.Rmd     # US regression models, interaction effects & spatial diagnostics
+├── Data Cleaning(code)/           # Python notebooks for data preprocessing & merging
+│   ├── CHN_unemployment_code.ipynb      # Data wrangling script for China's provincial data
+│   └── US_unemployment_code.ipynb       # Data alignment & cleaning for US state-level data
+├── Data/                          # Project datasets repository
+│   ├── Clean Data/                      # Processed datasets ready for regression modeling
+│   │   ├── CHN_unemployment_combine.csv     # Merged China policy & unemployment data
+│   │   ├── us_hpi_combine.csv               # Merged US Housing Price Index & policy data
+│   │   └── us_unemployment_combine.csv      # Merged US unemployment & policy data
+│   └── Raw Data/                        # Original datasets sourced from BLS, and NBS
+│       ├── China Unemployment Rate.csv
+│       ├── U.S. unemployment rate(monthly).csv
+│       └── US HPI Data.csv
+├── Final Report.pdf               
+└── README.md                    
