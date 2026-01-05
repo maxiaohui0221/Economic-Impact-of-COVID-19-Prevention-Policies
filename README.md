@@ -26,7 +26,9 @@ The US economy showed **high sensitivity** to specific policy measures. The fina
 * **Significant Predictors:** Workplace closing, International travel control, and School closing were statistically significant.
 * **Interaction Effects:** We found a significant interaction between **School Closing** and **Workplace Closing**.
     * *Insight:* The combined impact of closing both schools and workplaces amplifies unemployment more than the sum of their individual effects (likely due to childcare constraints on the workforce).
-<img width="1038" height="864" alt="截屏2026-01-04 下午10 39 52" src="https://github.com/user-attachments/assets/156bf7f5-f830-4096-98c3-dee9135b8853" />
+<p align="center">
+  <img width="600" height="434" alt="截屏2026-01-04 下午10 42 57" src="https://github.com/user-attachments/assets/2c3a5866-d2d7-4310-8162-0ba61af2f82e" />
+</p>
 
 * **Non-linear Relationships:** "Stay-at-home requirements" showed a **U-shaped** relationship with unemployment (Quadratic term significant).
 
