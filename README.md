@@ -26,6 +26,11 @@ The US economy showed **high sensitivity** to specific policy measures. The fina
 * **Significant Predictors:** Workplace closing, International travel control, and School closing were statistically significant.
 * **Interaction Effects:** We found a significant interaction between **School Closing** and **Workplace Closing**.
     * *Insight:* The combined impact of closing both schools and workplaces amplifies unemployment more than the sum of their individual effects (likely due to childcare constraints on the workforce).
+<p align="center">
+  <img src="visuals/fig4_interaction_plot.png" width="600" alt="Interaction Effect Plot">
+  <br>
+  <em>Figure: Interaction between workplace and school closings on unemployment rate.</em>
+</p>
 * **Non-linear Relationships:** "Stay-at-home requirements" showed a **U-shaped** relationship with unemployment (Quadratic term significant).
 
 ### 2. 🇨🇳 China Unemployment Model
@@ -71,7 +76,7 @@ The analysis followed a rigorous statistical framework (detailed in Section 3 of
 │   │   ├── CHN_unemployment_combine.csv     # Merged China policy & unemployment data
 │   │   ├── us_hpi_combine.csv               # Merged US Housing Price Index & policy data
 │   │   └── us_unemployment_combine.csv      # Merged US unemployment & policy data
-│   └── Raw Data/                        # Original datasets sourced from BLS, and NBS
+│   └── Raw Data/                        # Original datasets sourced from OxCGRT, BLS, and NBS
 │       ├── China Unemployment Rate.csv
 │       ├── U.S. unemployment rate(monthly).csv
 │       └── US HPI Data.csv
