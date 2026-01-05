@@ -27,7 +27,7 @@ The US economy showed **high sensitivity** to specific policy measures. The fina
 * **Interaction Effects:** We found a significant interaction between **School Closing** and **Workplace Closing**.
     * *Insight:* The combined impact of closing both schools and workplaces amplifies unemployment more than the sum of their individual effects (likely due to childcare constraints on the workforce).
 <p align="center">
-  <img src="visuals/fig4_interaction_plot.png" width="600" alt="Interaction Effect Plot">
+  <img src="Visuals/unemployment vs workplace closing.pdf" width="600" alt="Interaction Effect Plot">
   <br>
   <em>Figure: Interaction between workplace and school closings on unemployment rate.</em>
 </p>
@@ -80,5 +80,6 @@ The analysis followed a rigorous statistical framework (detailed in Section 3 of
 │       ├── China Unemployment Rate.csv
 │       ├── U.S. unemployment rate(monthly).csv
 │       └── US HPI Data.csv
+├── Visuals/
 ├── Final Report.pdf               
 └── README.md                    
