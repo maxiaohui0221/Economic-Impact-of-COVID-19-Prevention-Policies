@@ -1,0 +1,360 @@
+---
+title: "China_Unemployment_rate_analysis"
+author: "Xiaohui Ma"
+date: "2024-11-08"
+output: html_document
+---
+
+## The Data
+
+```{r}
+china_unemployment <- read.csv("/Users/maxiaohui/Desktop/Honor Capstone project 2024-25/Honor project data/Unemployment Rate/CHN_unemployment_combine.csv")
+head(china_unemployment)
+```
+## Variables:
+
+Response(dependent variable):
+  -Unemployment rate of china
+
+Predictors(independent variables):
+  -state
+  -school closing
+  -workplace closing
+  -cancel public event
+  -restriction gathering
+  -close public transport
+  -state at home requirement
+  -restrictions on internal movement
+  
+```{r}
+summary(china_unemployment)
+```
+```{r}
+china_unemployment$Year <- as.factor(china_unemployment$Year)
+str(china_unemployment)
+```
+```{r}
+colSums(is.na(china_unemployment))
+```
+No missing values in the data.
+
+##EDA: Distribution of response variables
+```{r}
+r <- ggplot(china_unemployment, aes(x=Unemployment.Rate  )) +
+  geom_histogram(fill="lightblue",color="black",bins=20) +
+  labs(title="Distribution of Unemployment.Rate in China ", x="Unemployment.Rate  ", y="Count") +
+  theme_minimal()
+
+r
+```
+## EDA: Distribution of predictors 
+```{r}
+p1 <- ggplot(china_unemployment, aes(x=School.closing)) +
+  geom_histogram(fill="lightblue",color="black",bins=20) +
+  labs(title="Distribution of School.closing", x="School.closing", y="Count") +
+  theme_minimal()
+p2 <- ggplot(china_unemployment, aes(x=Workplace.closing)) +
+  geom_histogram(fill="lightblue",color="black",bins=20) +
+  labs(title="Distribution of Workplace.closing", x="Workplace.closing", y="Count") +
+  theme_minimal()
+p3 <- ggplot(china_unemployment, aes(x=Cancel.public.event)) +
+  geom_histogram(fill="lightblue",color="black",bins=20) +
+  labs(title="Distribution of Cancel.public.event ", x="Cancel.public.event ", y="Count") +
+  theme_minimal()
+p4 <- ggplot(china_unemployment, aes(x=Restriction.on.gathering)) +
+  geom_histogram(fill="lightblue",color="black",bins=20) +
+  labs(title="Distribution of Restriction.on.gathering", x="Restriction.on.gathering", y="Count") +
+  theme_minimal()
+p5 <- ggplot(china_unemployment, aes(x=Close.public.transport)) +
+  geom_histogram(fill="lightblue",color="black",bins=20) +
+  labs(title="Distribution of Close.public.transport", x="Close.public.transport", y="Count") +
+  theme_minimal()
+p6 <- ggplot(china_unemployment, aes(x=State.at.home.requirement )) +
+  geom_histogram(fill="lightblue",color="black",bins=20) +
+  labs(title="Distribution of State.at.home.requirement ", x="State.at.home.requirement ", y="Count") +
+  theme_minimal()
+p7 <- ggplot(china_unemployment, aes(x=Restrictions.on.internal.movement)) +
+  geom_histogram(fill="lightblue",color="black",bins=20) +
+  labs(title="Distribution of internal.movement control", x="Restrictions.on.internal.movement", y="Count") +
+  theme_minimal()
+p8 <- ggplot(china_unemployment, aes(x=International.travel.control )) +
+  geom_histogram(fill="lightblue",color="black",bins=20) +
+  labs(title="Distribution of International control ", x="International.travel.control", y="Count") +
+  theme_minimal()
+
+grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, ncol= 2)
+
+```
+
+
+## EDA: Response Vs. Predictors
+  
+```{r}
+library("ggplot2") 
+library("gridExtra")
+
+s1<-ggplot(china_unemployment, aes(x=School.closing, y=Unemployment.Rate)) + geom_point(alpha = 0.5, size = 1.5) + theme_minimal()
+s2<-ggplot(china_unemployment, aes(x=Workplace.closing, y=Unemployment.Rate)) + geom_point(alpha = 0.5, size = 1.5) + theme_minimal()
+s3<-ggplot(china_unemployment, aes(x=Cancel.public.event, y=Unemployment.Rate)) + geom_point(alpha = 0.5, size = 1.5) + theme_minimal()
+s4<-ggplot(china_unemployment, aes(x=Restriction.on.gathering, y=Unemployment.Rate)) + geom_point(alpha = 0.5, size = 1.5) + theme_minimal()
+s5<-ggplot(china_unemployment, aes(x=Close.public.transport, y=Unemployment.Rate)) + geom_point(alpha = 0.5, size = 1.5) + theme_minimal()
+s6<-ggplot(china_unemployment, aes(x=State.at.home.requirement, y=Unemployment.Rate)) + geom_point(alpha = 0.5, size = 1.5) + theme_minimal()
+s7<-ggplot(china_unemployment, aes(x=Restrictions.on.internal.movement, y=Unemployment.Rate)) + geom_point(alpha = 0.5, size = 1.5) + theme_minimal()
+s8<-ggplot(china_unemployment, aes(x=International.travel.control, y=Unemployment.Rate)) + geom_point(alpha = 0.5, size = 1.5) + theme_minimal()
+
+
+grid.arrange(s1, s2,s3,s4, s5, s6, s7, s8, ncol = 4, nrow = 2)
+
+
+
+```
+There is slight positive relationship between US unemployment rate and all response variables
+
+```{r}
+library(ggforce)
+
+ggplot(data = china_unemployment) +
+geom_point(mapping = aes(x = Year, y = Unemployment.Rate, color = Year)) +
+facet_wrap_paginate(~ State, nrow = 5)
+
+#print it out
+ggplot(data = china_unemployment) +
+geom_point(mapping = aes(x = Year, y = Unemployment.Rate, color = Year),size = 8) +
+  geom_line(mapping = aes(x = Year, y = Unemployment.Rate, group = 1))+
+facet_wrap_paginate(~ State, nrow = 5, page = 1)+
+   theme(text = element_text(size = 35))
+
+pdf("unemployment_by_state_china.pdf", width = 12, height = 10)
+  print(
+    ggplot(china_unemployment, aes(x = Year, y = Unemployment.Rate, color = Year)) +
+      geom_point(size = 8) +
+      geom_line(mapping = aes(x = Year, y = Unemployment.Rate, group = 1))+
+      facet_wrap_paginate(~ State, nrow = 5, page = i))+
+     theme(text = element_text(size = 18))
+dev.off()
+```
+
+```{r}
+selected_states <- c("Beijing")
+
+filtered_data <- china_unemployment %>%
+  filter(State %in% selected_states)
+
+ggplot(data = filtered_data) +
+geom_point(mapping = aes(x = Year, y = Unemployment.Rate, color = Year),size = 3) +
+  labs(title = "Beijing")+ 
+  geom_line(mapping = aes(x = Year, y = Unemployment.Rate, group = 1))+
+  theme(text = element_text(size = 14))
+
+pdf("unemployment_Beijing.pdf", width = 12, height = 10)
+  print(ggplot(data = filtered_data) +
+geom_point(mapping = aes(x = Year, y = Unemployment.Rate, color = Year), size = 8) +
+  geom_line(mapping = aes(x = Year, y = Unemployment.Rate, group = 1))+
+ theme(text = element_text(size = 35)))
+  
+dev.off()
+```
+
+```{r}
+ggplot(data = china_unemployment) +
+geom_point(mapping = aes(x = School.closing, y = Unemployment.Rate)) +
+facet_wrap(~ State, nrow = 4)
+```
+
+
+```{r}
+# Scatterplot for Month vs Unemployment rate with color based on Year and State
+library(ggplot2)
+library(dplyr)
+
+selected_states <- c("Jiangxi", "Hebei", "Hubei", "Beijing")
+
+filtered_data <- china_unemployment %>%
+  filter(State %in% selected_states)
+
+ggplot(filtered_data, aes(x = Year, y = Unemployment.Rate, color = State)) +
+  geom_point() +
+ geom_smooth(method = "lm", se = F) +
+  labs(title = "China Unemplyment rate vs Month (Colored by State)", 
+       x = "Year", 
+       y = "Unemplyment rate") +
+  theme_minimal() +
+  scale_color_manual(values = brewer.pal(n = 4, name = "Set2") )
+```
+
+```{r}
+ggplot(china_unemployment , aes(x = Workplace.closing , y = Unemployment.Rate, color = Year)) +
+  geom_point() +
+  geom_smooth(method = "loess", se = FALSE, span = 1) +
+  labs(title = "Unemplyment rate vs School.closing (Colored by Workplace closing)", 
+       x = "School.closing", 
+       y = "Unemplyment rate") +
+  theme_minimal() 
+```
+
+```{r}
+ggplot(china_unemployment , aes(x = Close.public.transport , y = Unemployment.Rate, color = Year)) +
+  geom_point() +
+  geom_smooth(method = "loess", se = FALSE, span = 1) +
+  labs(title = "Unemplyment rate vs School.closing (Colored by Workplace closing)", 
+       x = "School.closing", 
+       y = "Unemplyment rate") +
+  theme_minimal() 
+```
+
+```{r}
+china_unemployment$WorkplaceClosingGroup <- cut(
+  china_unemployment$Workplace.closing,
+  breaks = 3, 
+  labels = c("Low", "Medium", "High"),
+  include.lowest = TRUE
+)
+
+ggplot(china_unemployment , aes(x = School.closing, y = Unemployment.Rate, color = WorkplaceClosingGroup)) +
+  geom_point() +
+  geom_smooth(method = "loess", se = FALSE, span = 1) +
+  labs(title = "Unemplyment rate vs School.closing (Colored by Workplace closing)", 
+       x = "School.closing", 
+       y = "Unemplyment rate") +
+  theme_minimal() +
+  scale_color_manual(values = c("lightblue", "blue", "lightgreen"))
+```
+
+
+## EDA: Correlation check
+```{r}
+# Install and load the ggcorrplot package
+library(ggcorrplot)
+
+
+reduced_data_china <- subset(china_unemployment, select = c(School.closing, Workplace.closing,  Cancel.public.event, Restriction.on.gathering, Close.public.transport,State.at.home.requirement, Restrictions.on.internal.movement, International.travel.control))
+
+# Compute correlation at 2 decimal places
+corr_matrix = round(cor(reduced_data_china), 2)
+
+# Compute and show the  result
+ggcorrplot(corr_matrix, hc.order = TRUE, type = "lower",
+          lab = TRUE)
+```
+
+## Model Selection
+
+### model base
+```{r}
+library("car")
+library(MASS)
+
+#defining variables for easier model fitting
+y1 <- china_unemployment$State
+y2 <- china_unemployment$Year
+y3 <- china_unemployment$School.closing
+y4 <- china_unemployment$Workplace.closing
+y5 <- china_unemployment$Cancel.public.event
+y6 <- china_unemployment$Restriction.on.gathering
+y7 <- china_unemployment$Close.public.transport
+y8 <- china_unemployment$State.at.home.requirement
+y9 <- china_unemployment$Restrictions.on.internal.movement
+y10 <-china_unemployment$International.travel.control
+
+model_base <- lm(Unemployment.Rate ~ y1 + y2 + y3 + y4 + y5 + y6 + y7 + y8 + y9 + y10, data = china_unemployment)
+
+summary(model_base)
+
+vif(model_base)
+```
+y2, y3, y4, y10 have serious problem of multicollinearity. y5, y9 have mild multicollinearity
+
+#model 1 (reduce main model: remove main variable with high vif)
+
+```{r}
+model.1 <- lm(Unemployment.Rate ~ y1 + y2 + y6 + y7 + y8 + y9, data = china_unemployment)
+
+summary(model.1)
+
+vif(model.1)
+```
+#model2 (add quadratic terms)
+```{r}
+model.2 <- lm(Unemployment.Rate ~ y1 + y2 + y6 + y7 + y8 + y9 + I(y6^2) + I(y7^2) + I(y8^2) + I(y9^2), data = china_unemployment)
+
+summary(model.2)
+
+```
+#model3 (reduce quadratic term that are non-significant)
+
+```{r}
+model.3 <- lm(Unemployment.Rate ~ y1 + y2 + y6 + y7 + y8 + y9, data = china_unemployment)
+
+summary(model.3)
+```
+No quadratic term are significant 
+
+
+#mode 4 (add significant interaction term)
+```{r}
+model.4 <- lm(Unemployment.Rate ~ y1 + y2 + y6 + y7 + y8 + y9, data = china_unemployment)
+
+summary(model.4)
+```
+
+#mode 5 (remove non-significant main variable)
+
+```{r}
+model.5 <- lm(Unemployment.Rate ~ y1 + y6, data = china_unemployment)
+
+summary(model.5)
+```
+
+
+### Checking Linearity and Constant Variance
+
+```{r}
+pre_res <- data.frame(fitted = fitted(model.5), residuals = resid(model.5))
+
+library(ggplot2)
+ggplot(data = pre_res, aes(x = fitted, y = residuals)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+  labs(x = "Predicted values", y = "Residuals")
+```
+There is no clear pattern or trend.
+
+### Checking Normality Assumption
+```{r}
+qqnorm(resid(model.5))
+qqline(resid(model.5))
+
+shapiro.test(resid(model.5))
+```
+p-value = 0.0114 < 0.05, 
+Reject, and suggest that residuals not appear to be normally distributed. 
+
+### Checking Independence
+```{r}
+library(car)
+dwt(model.5)
+```
+
+p-value = 0.994 > 0.05
+Fail to Reject, and suggest that residuals are all independent
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
