@@ -1,8 +1,6 @@
 # 🌍 Economic Impact of COVID-19 Prevention Policies: US vs. China
-### A Comparative Statistical Analysis of Unemployment & Housing Markets
 
-![R](https://img.shields.io/badge/Language-R-blue)
-![Python](https://img.shields.io/badge/Language-Python-3.8%2B-yellow)
+![R](https://img.shields.io/badge/R-276DC3?style=flat&logo=r&logoColor=white)![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
 ![Focus](https://img.shields.io/badge/Focus-Regression%20%26%20Spatial%20Analysis-orange)
 ![Institution](https://img.shields.io/badge/Institution-UC%20Riverside-green)
 
@@ -17,7 +15,7 @@ Using **Multiple Linear Regression** and **Spatial Autocorrelation Diagnostics**
 1.  **Unemployment Rate** (Regional analysis for US & China)
 2.  **Housing Price Index (HPI)** (US only, with spatial dependency checks)
 
-**[👉 Click here to read the full Capstone Paper (PDF)](./Xiaohui Ma - Final Written Capstone - Spring 2025.pdf)**
+**[👉 Click here to read the full Capstone Paper](https://escholarship.org/uc/item/9127r4wm)**
 
 ---
 
