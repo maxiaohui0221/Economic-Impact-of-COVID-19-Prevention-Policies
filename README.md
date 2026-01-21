@@ -12,7 +12,7 @@
 This project investigates how differing quarantine policies (2019-2023) influenced economic stability in two distinct governance systems: the **United States** (decentralized) and **China** (centralized).
 
 Using **Multiple Linear Regression** and **Spatial Autocorrelation Diagnostics**, the study quantifies the relationship between the **Quarantine Policy Index** (from Oxford OxCGRT) and two key economic indicators:
-1.  **Unemployment Rate** (Regional analysis for US & China)
+1.  **Unemployment Rate** (Regional analysis for US & China)[Tableau dashboard](https://public.tableau.com/app/profile/xiaohui.ma8749)
 2.  **Housing Price Index (HPI)** (US only, with spatial dependency checks)
 
 **[👉 Click here to read the full Capstone Paper](https://escholarship.org/uc/item/9127r4wm)**
